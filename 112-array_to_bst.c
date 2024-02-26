@@ -19,12 +19,12 @@ bst_t *array_to_bst(int *array, size_t size)
 	{
 		if (i == 0)
 		{
-			if(!bst_insert(&root, array[i]))
+			if (!(bst_insert(&root, array[i])))
 			return (NULL);
 		}
 		else
 		{
-			if(!bst_insert(&root, array[i]))
+			if (!bst_insert(&root, array[i]))
 			return (NULL);
 		}
 		i++;
