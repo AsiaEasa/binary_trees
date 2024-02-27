@@ -7,27 +7,27 @@
  */
 heap_t *array_to_heap(int *array, size_t size)
 {
-        int i;
-        heap_t *root;
+	int x;
+	heap_t *root;
 
-        root = NULL;
-        if (size == 0)
-                return (NULL);
+	root = NULL;
+	if (size == 0)
+		return (NULL);
 
-        i = 0;
-        while (i < (int)size)
-        {
-                if (i == 0)
-                {
-                        if (!heap_insert(&root, array[i]))
-                                return (NULL);
-                }
-                else
-                {
-                        if (!heap_insert(&root, array[i]))
-                                return (NULL);
-                }
-                i++;
-        }
-        return (root);
+	x = 0;
+	while (x < (int)size)
+	{
+		if (x == 0)
+		{
+			if (!heap_insert(&root, array[i]))
+				return (NULL);
+		}
+		else
+		{
+			if (!heap_insert(&root, array[i]))
+				return (NULL);
+		}
+		x++;
+	}
+	return (root);
 }
