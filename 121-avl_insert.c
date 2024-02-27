@@ -8,6 +8,7 @@
  */
 avl_t *avl_insert(avl_t **tree, int value)
 {
+	int balance;
 	if (!tree)
 		return (NULL);
 
@@ -32,30 +33,25 @@ avl_t *avl_insert(avl_t **tree, int value)
 	else
 		return (NULL);
 
-	/* Update balance factor and check for rotations */
-	int balance = binary_tree_balance(*tree);
+	balance = binary_tree_balance(*tree);
 
-	/* Left Left Case */
 	if (balance > 1 && value < (*tree)->left->n)
-		return binary_tree_rotate_right(*tree);
+		return (binary_tree_rotate_right(*tree));
 
-	/* Right Right Case */
 	if (balance < -1 && value > (*tree)->right->n)
-		return binary_tree_rotate_left(*tree);
+		return (binary_tree_rotate_left(*tree));
 
-	/* Left Right Case */
 	if (balance > 1 && value > (*tree)->left->n)
 	{
 		(*tree)->left = binary_tree_rotate_left((*tree)->left);
-		return binary_tree_rotate_right(*tree);
+		return (binary_tree_rotate_right(*tree));
 	}
 
-	/* Right Left Case */
 	if (balance < -1 && value < (*tree)->right->n)
 	{
 		(*tree)->right = binary_tree_rotate_right((*tree)->right);
-		return binary_tree_rotate_left(*tree);
+		return (binary_tree_rotate_left(*tree));
 	}
 
-	return *tree;
+	return (*tree);
 }
