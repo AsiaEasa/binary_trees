@@ -22,12 +22,16 @@ avl_t *avl_insert(avl_t **tree, int value)
 	{
 		(*tree)->left = avl_insert(&((*tree)->left), value);
 		if ((*tree)->left)
-			(*tree)->left->parent = *tree; }
+			(*tree)->left->parent = *tree; 
+		else
+			return (NULL); }
 	else if (value > (*tree)->n)
 	{
 		(*tree)->right = avl_insert(&((*tree)->right), value);
 		if ((*tree)->right)
-			(*tree)->right->parent = *tree; }
+			(*tree)->right->parent = *tree;
+		else
+			return (NULL); }
 	else
 		return (NULL);
 	balance = binary_tree_balance(*tree);
