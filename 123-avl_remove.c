@@ -76,7 +76,7 @@ int remove(avl_t *node)
  * @value: The value of the node to remove.
  * Return: The updated tree.
  */
-avl_t *avl_remove(avl_t *root, int value);
+avl_t *avl_remove(avl_t *root, int value)
 {
 	int XX;
 
