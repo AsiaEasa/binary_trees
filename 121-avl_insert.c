@@ -10,14 +10,12 @@ avl_t *avl_insert(avl_t **tree, int value)
 {
 	int balance;
 
-	if (!tree)
+	if (!tree || !value)
 		return (NULL);
 
-	if (*tree == NULL)
+	if (!(*tree))
 	{
 		*tree = binary_tree_node(NULL, value);
-		if (!*tree)
-			return (NULL);
 		return (*tree); }
 
 	if (value < (*tree)->n)
