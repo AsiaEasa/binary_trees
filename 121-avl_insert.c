@@ -1,61 +1,61 @@
 #include "binary_trees.h"
 
 /**
- * bst_insert - Inserts a value in a Binary Search Tree.
- * @tree: Double pointer to the root node of the BST to insert the value.
- * @value: Value to store in the node to be inserted.
- *
- * Return: Pointer to the created node, or NULL on failure.
+ * avl_insert - inserts a value in an AVL Tree
+ * @tree: double pointer to the root node of the AVL tree
+ * @value: value to store in the node to be inserted
+ * Return: pointer to the created node, or NULL on failure
  */
 avl_t *avl_insert(avl_t **tree, int value)
 {
-    bst_t *new_node, *CC;
+	if (!tree)
+		return (NULL);
 
-    if (!tree)
-        return (NULL);
+	if (*tree == NULL)
+	{
+		*tree = binary_tree_node(NULL, value);
+		if (!*tree)
+			return (NULL);
+		return (*tree);
+	}
 
-    if (!(*tree))
-    {
-        new_node = binary_tree_node(NULL, value);
-        if (!(new_node))
-            return (NULL);
-        *tree = new_node;
-        return (new_node);
-    }
+	if (value < (*tree)->n)
+	{
+		(*tree)->left = avl_insert(&((*tree)->left), value);
+		(*tree)->left->parent = *tree;
+	}
+	else if (value > (*tree)->n)
+	{
+		(*tree)->right = avl_insert(&((*tree)->right), value);
+		(*tree)->right->parent = *tree;
+	}
+	else
+		return (NULL);
 
-    CC = *tree;
+	/* Update balance factor and check for rotations */
+	int balance = binary_tree_balance(*tree);
 
-    while (1)
-    {
-        if (value < CC->n)
-        {
-            if (!(CC->left))
-            {
-                new_node = binary_tree_node(CC, value);
-                if (!new_node)
-                    return (NULL);
-                CC->left = new_node;
-                return (new_node);
-            }
-            else
-                CC = CC->left;
-        }
-        else if (value > CC->n)
-        {
-            if (!(CC->right))
-            {
-                new_node = binary_tree_node(CC, value);
-                if (!(new_node))
-                    return (NULL);
-                CC->right = new_node;
-                return (new_node);
-            }
-            else
-                CC = CC->right;
-        }
-        else
-            return (NULL);
-    }
+	/* Left Left Case */
+	if (balance > 1 && value < (*tree)->left->n)
+		return binary_tree_rotate_right(*tree);
 
-    return (NULL);
+	/* Right Right Case */
+	if (balance < -1 && value > (*tree)->right->n)
+		return binary_tree_rotate_left(*tree);
+
+	/* Left Right Case */
+	if (balance > 1 && value > (*tree)->left->n)
+	{
+		(*tree)->left = binary_tree_rotate_left((*tree)->left);
+		return binary_tree_rotate_right(*tree);
+	}
+
+	/* Right Left Case */
+	if (balance < -1 && value < (*tree)->right->n)
+	{
+		(*tree)->right = binary_tree_rotate_right((*tree)->right);
+		return binary_tree_rotate_left(*tree);
+	}
+
+	return *tree;
 }
