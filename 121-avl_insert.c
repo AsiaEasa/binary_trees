@@ -25,14 +25,14 @@ avl_t *avl_insert(avl_t **tree, int value)
 		(*tree)->left = avl_insert(&((*tree)->left), value);
 		if ((*tree)->left == NULL)
 			return (NULL);
-		(*tree)->left->parent = *tree;  // Correction: Dereference here
+		(*tree)->left->parent = *tree;
 	}
 	else if (value > (*tree)->n)
 	{
 		(*tree)->right = avl_insert(&((*tree)->right), value);
 		if ((*tree)->right == NULL)
 			return (NULL);
-		(*tree)->right->parent = *tree;  // Correction: Dereference here
+		(*tree)->right->parent = *tree;
 	}
 	else
 		return (NULL);
