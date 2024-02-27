@@ -64,5 +64,5 @@ bst_t *bst_search(const bst_t *tree, int value);
 
 bst_t *bst_search(const bst_t *tree, int value);
 bst_t *bst_remove(bst_t *root, int value);
-
+avl_t *avl_insert(avl_t **tree, int value);
 #endif
