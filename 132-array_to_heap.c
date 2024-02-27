@@ -19,12 +19,12 @@ heap_t *array_to_heap(int *array, size_t size)
 	{
 		if (x == 0)
 		{
-			if (!heap_insert(&root, array[i]))
+			if (!heap_insert(&root, array[x]))
 				return (NULL);
 		}
 		else
 		{
-			if (!heap_insert(&root, array[i]))
+			if (!heap_insert(&root, array[x]))
 				return (NULL);
 		}
 		x++;
