@@ -8,9 +8,45 @@
  */
 
 heap_t *heap_insert(heap_t **root, int value)
-{
-	if (!root || !value)
+{ heap_t *new_node, *CC;
+
+	if (!tree || !value)
 		return (NULL);
 
-	return (*root);
-}
+	if (!(*tree))
+	{ new_node = binary_tree_node(NULL, value);
+		if (!(new_node))
+			return (NULL);
+		*tree = new_node;
+		return (new_node); }
+	CC = *tree;
+
+	while (1)
+	{
+		if (value < CC->n)
+		{
+			if (!(CC->left))
+			{
+				new_node = binary_tree_node(CC, value);
+				if (!new_node)
+					return (NULL);
+				CC->left = new_node;
+				return (new_node);
+			}
+			else
+				CC = CC->left; }
+		else if (value > CC->n)
+		{
+			if (!(CC->right))
+			{
+				new_node = binary_tree_node(CC, value);
+				if (!(new_node))
+					return (NULL);
+				CC->right = new_node;
+				return (new_node);
+			}
+			else
+				CC = CC->right; }
+		else
+			return (NULL); }
+	return (NULL); }
