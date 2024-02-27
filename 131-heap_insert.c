@@ -10,16 +10,16 @@
 heap_t *heap_insert(heap_t **root, int value)
 { heap_t *new_node, *CC;
 
-	if (!tree || !value)
+	if (!root || !value)
 		return (NULL);
 
-	if (!(*tree))
+	if (!(*root))
 	{ new_node = binary_tree_node(NULL, value);
 		if (!(new_node))
 			return (NULL);
-		*tree = new_node;
+		*root = new_node;
 		return (new_node); }
-	CC = *tree;
+	CC = *root;
 
 	while (1)
 	{
