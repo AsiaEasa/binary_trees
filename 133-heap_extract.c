@@ -50,7 +50,7 @@ size_t _tree_size(const binary_tree_t *tree)
  * _tree_preorder - goes through a binary tree using pre-order traversal
  * @tree: a pointer to the root
  * @node: the node
- * @H:height 
+ * @H:height
  * Return: Nothing
  */
 void _tree_preorder(heap_t *tree, heap_t **node, size_t H)
