@@ -1,19 +1,19 @@
 #include "binary_trees.h"
 
 /**
- * _tree_size - measures the size of a binary tree
+ * tr_size - measures the size of a binary tree
  * @tree: pointer to the root node of the tree to measure the size
  * Return: the size or 0
  */
-size_t 2_tree_size(const binary_tree_t *tree)
+size_t tr_size(const binary_tree_t *tree)
 {
 	size_t L, R;
 
 	if (!tree)
 		return (0);
 
-	L = 2_tree_size(tree->left);
-	R = 2_tree_size(tree->right);
+	L = tr_size(tree->left);
+	R = tr_size(tree->right);
 	return (L + R + 1);
 }
 
@@ -33,7 +33,7 @@ int *heap_to_sorted_array(heap_t *heap, size_t *size)
 	if (!heap || !size)
 		return (NULL);
 
-	*size = 2_tree_size(heap) + 1;
+	*size = tr_size(heap) + 1;
 
 	a = malloc(sizeof(int) * (*size));
 
