@@ -2,71 +2,67 @@
 #include <stdlib.h>
 
 /**
- * tree_height - measures the height of a binary tree
- * @tree: pointer to the root node of the tree to measure the height
- *
- * Return: Height or 0 if tree is NULL
+ * _tree_height - measures the height of a binary tree
+ * @tree: pointer to the root node
+ * Return: height or 0
  */
-size_t tree_height(const heap_t *tree)
+
+size_t _tree_height(const binary_tree_t *tree)
 {
-	size_t height_l = 0;
-	size_t height_r = 0;
+	size_t L, R;
+
+	L = 0;
+	R = 0;
 
 	if (!tree)
 		return (0);
 
 	if (tree->left)
-		height_l = 1 + tree_height(tree->left);
+		L = 1 + _tree_height(tree->left);
 
 	if (tree->right)
-		height_r = 1 + tree_height(tree->right);
+		R = 1 + _tree_height(tree->right);
 
-	if (height_l > height_r)
-		return (height_l);
-	return (height_r);
+	if (L >= R)
+		return (L);
+	else
+		return (R);
 }
+
 /**
- * tree_size_h - measures the sum of heights of a binary tree
- * @tree: pointer to the root node of the tree to measure the height
- *
- * Return: Height or 0 if tree is NULL
+ * _tree_size - measures the size of a binary tree
+ * @tree: pointer to the root node of the tree to measure the size
+ * Return: the size or 0
  */
-size_t tree_size_h(const binary_tree_t *tree)
+size_t _tree_size(const binary_tree_t *tree)
 {
-	size_t height_l = 0;
-	size_t height_r = 0;
+	size_t L, R;
 
 	if (!tree)
 		return (0);
 
-	if (tree->left)
-		height_l = 1 + tree_size_h(tree->left);
-
-	if (tree->right)
-		height_r = 1 + tree_size_h(tree->right);
-
-	return (height_l + height_r);
+	L = _tree_size(tree->left);
+	R = _tree_size(tree->right);
+	return (L + R + 1);
 }
 
 /**
- * _preorder - goes through a binary tree using pre-order traversal
- * @tree: pointer to the root node of the tree to traverse
- * @node: will be last note in traverse
- * @height: height of tree
- *
- * Return: No Return
+ * _tree_preorder - goes through a binary tree using pre-order traversal
+ * @tree: a pointer to the root
+ * @node: the node
+ * @H:height 
+ * Return: Nothing
  */
-void _preorder(heap_t *tree, heap_t **node, size_t height)
+void _tree_preorder(heap_t *tree, heap_t **node, size_t H)
 {
-	if (!tree)
+	if (!tree || !node)
 		return;
 
-	if (!height)
+	if (!H)
 		*node = tree;
-	height--;
-
-	_preorder(tree->left, node, height);
-	_preorder(tree->right, node, height);
+	--H;
+	_tree_preorder(tree->left, node, H);
+	_tree_preorder(tree->right, node, H);
 }
 
 /**
@@ -126,7 +122,7 @@ int heap_extract(heap_t **root)
 		return (value);
 	}
 
-	_preorder(heap_r, &node, tree_height(heap_r));
+	_tree_preorder(heap_r, &node, _tree_height(heap_r));
 
 	heap_r->n = node->n;
 	if (node->parent->right)
